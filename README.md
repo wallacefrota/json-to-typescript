@@ -11,7 +11,7 @@
 
 <br/>
 
-<img src="https://raw.githubusercontent.com/wallacefrota/json-to-typescript/assets/demo.gif" alt="Demo" width="700"/>
+<img src="https://raw.githubusercontent.com/wallacefrota/json-to-typescript/main/assets/demo.gif" alt="Demo" width="700"/>
 
 <br/>
 
