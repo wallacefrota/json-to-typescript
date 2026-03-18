@@ -1,0 +1,237 @@
+{
+  "name": "json-to-typescript",
+  "displayName": "TypeForge — JSON to TypeScript",
+  "description": "Generate clean, production-ready TypeScript types from JSON instantly. Stop writing types manually.",
+  "version": "1.0.0",
+  "publisher": "frotadev",
+  "author": {
+    "name": "Wallace Frota"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Formatters",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "json",
+    "typescript",
+    "json to typescript",
+    "json to ts",
+    "json2ts",
+    "interface generator",
+    "type generator",
+    "typescript types",
+    "json schema",
+    "developer tools",
+    "code generation"
+  ],
+  "activationEvents": [
+    "onLanguage:json",
+    "onLanguage:jsonc",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onCommand:jsonToTs.preview",
+    "onCommand:jsonToTs.convertSelection",
+    "onCommand:jsonToTs.convertFile",
+    "onCommand:jsonToTs.convertClipboard",
+    "onCommand:jsonToTs.copyAsTs",
+    "onCommand:jsonToTs.smartPaste",
+    "onCommand:jsonToTs.togglePasteDetection"
+  ],
+  "galleryBanner": {
+    "color": "#3178C6",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wallacefrota/json-to-typescript"
+  },
+  "homepage": "https://github.com/wallacefrota/json-to-typescript",
+  "bugs": {
+    "url": "https://github.com/wallacefrota/json-to-typescript/issues"
+  },
+  "main": "./out/extension.js",
+  "license": "MIT",
+  "icon": "icon.png",
+  "jsonToTs.quoteStyle": {
+    "type": "string",
+    "enum": [
+      "single",
+      "double"
+    ],
+    "default": "single",
+    "description": "Quote style for generated types."
+  },
+  "jsonToTs.generateReadonly": {
+    "type": "boolean",
+    "default": false,
+    "description": "Generate readonly properties."
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "jsonToTs.preview",
+        "title": "JSON to TS: 🔍 Preview Interactive"
+      },
+      {
+        "command": "jsonToTs.convertSelection",
+        "title": "JSON to TS: Convert Selection"
+      },
+      {
+        "command": "jsonToTs.convertFile",
+        "when": "resourceLangId == json",
+        "group": "1_modification@101",
+        "title": "JSON to TS: Convert File"
+      },
+      {
+        "command": "jsonToTs.convertClipboard",
+        "title": "JSON to TS: Convert from Clipboard"
+      },
+      {
+        "command": "jsonToTs.copyAsTs",
+        "title": "JSON to TS: 📋 Copy how TypeScript"
+      },
+      {
+        "command": "jsonToTs.smartPaste",
+        "title": "JSON to TS: ⚡ Smart Paste (JSON → TS)"
+      },
+      {
+        "command": "jsonToTs.togglePasteDetection",
+        "title": "JSON to TS: 🔔 Toggle Paste Detection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "jsonToTs.preview",
+          "group": "1_modification@99"
+        },
+        {
+          "command": "jsonToTs.smartPaste",
+          "when": "editorLangId == typescript || editorLangId == typescriptreact || editorLangId == javascript",
+          "group": "9_cutcopypaste@100"
+        },
+        {
+          "command": "jsonToTs.convertSelection",
+          "when": "editorHasSelection",
+          "group": "1_modification@100"
+        },
+        {
+          "command": "jsonToTs.convertFile",
+          "group": "1_modification@101"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "jsonToTs.preview",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "editorLangId == json && !editorHasSelection"
+      },
+      {
+        "command": "jsonToTs.smartPaste",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "command": "jsonToTs.convertSelection",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "jsonToTs.convertFile",
+        "key": "ctrl+alt+shift+j",
+        "mac": "cmd+alt+shift+j"
+      }
+    ],
+    "configuration": {
+      "title": "JSON to TS Converter",
+      "properties": {
+        "jsonToTs.useInterface": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use 'interface' instead of 'type'"
+        },
+        "jsonToTs.rootName": {
+          "type": "string",
+          "default": "Root",
+          "description": "Interface name/root type"
+        },
+        "jsonToTs.addExport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Add 'export' to the interfaces"
+        },
+        "jsonToTs.useSemicolons": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use a semicolon"
+        },
+        "jsonToTs.optionalNull": {
+          "type": "boolean",
+          "default": true,
+          "description": "Null fields become optional"
+        },
+        "jsonToTs.detectEnums": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically detect string literal unions"
+        },
+        "jsonToTs.enumMaxValues": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum number of unique values ​​for enum"
+        },
+        "jsonToTs.useRealEnums": {
+          "type": "boolean",
+          "default": false,
+          "description": "Generate real 'enum'"
+        },
+        "jsonToTs.smartNullable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Distinguish optional (?) from nullable (| null)"
+        },
+        "jsonToTs.detectDates": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect ISO strings like Date | string"
+        },
+        "jsonToTs.pasteDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect pasted JSON and suggest automatic conversion"
+        },
+        "jsonToTs.showCodeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CodeLens on top of JSON files"
+        },
+        "jsonToTs.showNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Notify when opening JSON files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npx vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.37",
+    "@types/vscode": "^1.110.0",
+    "esbuild": "^0.27.4",
+    "typescript": "^5.9.3"
+  }
+}
