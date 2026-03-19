@@ -180,13 +180,7 @@ export interface User {
 
 ## 🔥 Coming Next
 
-* Enum generation
-
-* JSON Schema support
-
 * API response detection
-
-* Inline quick actions
 
 ## ⭐ Support
 
